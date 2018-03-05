@@ -14,4 +14,6 @@ function calculate($a,$b, $calcul)
         return $result; 
     }
 
+phpinfo();
+
 ?>
