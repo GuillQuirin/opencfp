@@ -74,4 +74,8 @@ class Speakers
 
         return $speaker->talks;
     }
+	
+    public function getIdentityProvider() {
+	return $this->identityProvider;
+    }	
 }
