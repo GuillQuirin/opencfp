@@ -16,4 +16,7 @@ function calculate($a,$b, $calcul)
 
 phpinfo();
 
+function sayHello() {
+    echo 'Hello';
+}
 ?>
