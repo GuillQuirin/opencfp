@@ -1,0 +1,42 @@
+{
+  "name": "localheinz/test-util",
+  "description": "Provides utilities for tests.",
+  "type": "library",
+  "keywords": [
+    "assertion",
+    "faker",
+    "phpunit",
+    "test"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Andreas Möller",
+      "email": "am@localheinz.com"
+    }
+  ],
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "require": {
+    "php": "^7.0",
+    "fzaninotto/faker": "^1.7.1",
+    "localheinz/classy": "0.3.0"
+  },
+  "require-dev": {
+    "infection/infection": "~0.7.0",
+    "localheinz/php-cs-fixer-config": "~1.8.0",
+    "phpunit/phpunit": "^6.4.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Localheinz\\Test\\Util\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Localheinz\\Test\\Util\\Test\\": "test/"
+    }
+  }
+}

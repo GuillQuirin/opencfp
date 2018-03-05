@@ -1,0 +1,6 @@
+.idea
+vendor
+infection-log.txt
+build/*
+!build/.gitkeep
+.php_cs.cache

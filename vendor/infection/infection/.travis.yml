@@ -1,0 +1,58 @@
+language: php
+
+sudo: false
+
+matrix:
+  include:
+    - php: 7.0
+    - php: 7.0
+      env: PHPDBG=1
+    - php: 7.1
+    - php: 7.1
+      env: PHPDBG=1
+    - php: 7.1
+      env: SYMFONY_VERSION="^4.0"
+    - php: 7.1
+      env: SYMFONY_VERSION="^4.0" PHPDBG=1
+    - php: 7.2
+    - php: 7.2
+      env: PHPDBG=1
+    - php: 7.2
+      env: SYMFONY_VERSION="^4.0"
+    - php: 7.2
+      env: SYMFONY_VERSION="^4.0" PHPDBG=1
+
+env:
+  global:
+    - INFECTION_FLAGS='--threads=4 --min-msi=59 --min-covered-msi=87'
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_install:
+  - composer selfupdate
+  - source .travis/xdebug.sh
+  - xdebug-disable
+
+install:
+  - composer install
+  - |
+   if [ "${SYMFONY_VERSION}" != "" ]; then
+      composer config --unset platform.php
+      composer require \
+        symfony/console:${SYMFONY_VERSION} \
+        symfony/process:${SYMFONY_VERSION} \
+        symfony/finder:${SYMFONY_VERSION} \
+        symfony/yaml:${SYMFONY_VERSION}
+   fi
+
+script:
+  - composer analyze
+  - if [[ $PHPDBG != 1 ]]; then xdebug-enable; fi
+  - if [[ $PHPDBG != 1 ]]; then vendor/bin/phpunit --coverage-clover=clover.xml; else phpdbg -qrr vendor/bin/phpunit --coverage-clover=clover.xml; fi
+  - ./tests/e2e_tests
+  - if [[ $PHPDBG != 1 ]]; then bin/infection $INFECTION_FLAGS; else phpdbg -qrr bin/infection $INFECTION_FLAGS; fi
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

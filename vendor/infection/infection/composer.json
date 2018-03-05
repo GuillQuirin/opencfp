@@ -1,0 +1,73 @@
+{
+    "name": "infection/infection",
+    "description": "Infection is a Mutation Testing framework for PHP. The mutation adequacy score can be used to measure the effectiveness of a test set in terms of its ability to detect faults.",
+    "keywords": ["mutation testing", "mutation framework", "testing", "coverage", "unit testing", "mutant"],
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/infection/infection/issues"
+    },
+    "authors": [
+        {
+            "name": "Maks Rafalko",
+            "email": "maks.rafalko@gmail.com",
+            "homepage": "https://twitter.com/maks_rafalko"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Infection\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Infection\\Tests\\": "tests/"
+        },
+        "files": ["tests/Helpers.php"]
+    },
+    "config": {
+        "platform": {
+            "php": "7.0.8"
+        },
+        "sort-packages": true
+    },
+    "conflict": {
+        "symfony/process": "3.4.2"
+    },
+    "require": {
+        "php": "^7.0",
+        "nikic/php-parser": "^3.0",
+        "padraic/phar-updater": "^1.0.4",
+        "pimple/pimple": "^3.2",
+        "sebastian/diff": "^1.4 || ^2.0 || ^3.0",
+        "symfony/console": "^3.2 || ^4.0",
+        "symfony/finder": "^3.2 || ^4.0",
+        "symfony/process": "^3.2 || ^4.0",
+        "symfony/yaml": "^3.2 || ^4.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.0",
+        "phpunit/phpunit": "^6.1"
+    },
+    "bin": ["bin/infection"],
+    "scripts": {
+        "analyze": [
+            "@cs:check",
+            "@phpstan",
+            "@composer validate --strict"
+        ],
+        "phpstan": [
+            "wget -nc https://github.com/phpstan/phpstan/releases/download/0.9.1/phpstan.phar",
+            "chmod a+x phpstan.phar",
+            "./phpstan.phar analyse src tests --level=2 -c phpstan.neon --no-interaction --no-progress"
+        ],
+        "cs:check": [
+            "wget -nc http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar",
+            "chmod a+x php-cs-fixer-v2.phar",
+            "./php-cs-fixer-v2.phar fix --config=.php_cs.dist -v --dry-run --stop-on-violation --using-cache=no --allow-risky=yes"
+        ],
+        "cs:fix": [
+            "./php-cs-fixer-v2.phar fix --config=.php_cs.dist -v --allow-risky=yes"
+        ]
+    }
+}
