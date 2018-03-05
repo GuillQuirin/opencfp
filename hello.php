@@ -1,8 +1,9 @@
 <?php
 
-echo "Ce script va afficher 10 fois hello.";
+//Passage de 10 à 12 hello
+echo "Ce script va afficher 12 fois hello.";
 
-for($i=0;$i<10;$i++)
+for($i=0;$i<12;$i++)
 {
     echo "Hello";
 }
