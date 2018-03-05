@@ -39,4 +39,15 @@ class Airport extends Eloquent implements AirportInformationDatabase
 
         return $airport;
     }
+
+    public function withName($name): self
+    {
+        $airport = $this->where('name', $name)->first(['name', 'code', 'country']);
+
+        if (!$airport instanceof self) {
+            throw new EntityNotFoundException("An airport matching '{$name}' was not found.");
+        }
+
+        return $airport;
+    }
 }
