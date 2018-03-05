@@ -385,3 +385,6 @@ The default phpunit.xml.dist file is in the root directory for the project.
 
 You may need to edit directory permissions for some vendor packages such as HTML Purifier. Check the `/cache` directory's
 permissions first.
+
+We should add a new line just for the fun.
+Proudly add by Valentin LENFANT.
