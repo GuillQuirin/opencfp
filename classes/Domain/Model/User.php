@@ -91,7 +91,7 @@ class User extends Eloquent
      *
      * @return bool
      */
-    public function delete(): bool
+    public function delete(): string
     {
         $this->talks()
             ->get()
@@ -107,6 +107,6 @@ class User extends Eloquent
             throw new \Exception('Unable to delete User');
         }
 
-        return true;
+        return "hello";
     }
 }
