@@ -103,4 +103,12 @@ abstract class BaseController
     {
         return new RedirectResponse($request->headers->get('referer'));
     }
+
+    /**
+     * @return string
+     */
+     protected function sayHello()
+    {
+      return "Hello !";
+    }
 }
