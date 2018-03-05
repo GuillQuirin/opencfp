@@ -31,15 +31,21 @@ class TalkHelper
     private $types;
 
     /**
+     * @var string[]
+     */
+    private $colors;
+
+    /**
      * @param $categories
      * @param $levels
      * @param $types
      */
-    public function __construct($categories, $levels, $types)
+    public function __construct($categories, $levels, $types, $colors)
     {
         $this->categories = $categories;
         $this->levels     = $levels;
         $this->types      = $types;
+        $this->colors      = $colors;
     }
 
     public function getTalkCategories()
@@ -135,5 +141,19 @@ class TalkHelper
         }
 
         return $level;
+    }
+
+    /**
+     * @param $level
+     *
+     * @return mixed
+     */
+    public function getLevelColor($level)
+    {
+        if (isset($this->colors[$level])) {
+            return $this->colors[$level];
+        }
+
+        return '#fff';
     }
 }
