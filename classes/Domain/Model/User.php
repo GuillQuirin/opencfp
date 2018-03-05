@@ -107,6 +107,6 @@ class User extends Eloquent
             throw new \Exception('Unable to delete User');
         }
 
-        return true;
+        return false;
     }
 }
